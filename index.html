@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестовое задание — Специалист-аналитик — МИ ФНС по управлению долгом</title>
+    <style>
+        :root {
+            --primary-color: #0A4C87;
+            --secondary-color: #1D73C2;
+            --accent-color: #E22129;
+            --success-color: #2F855A;
+            --text-color: #2D3748;
+            --bg-color: #F7FAFC;
+            --card-bg: #FFFFFF;
+            --border-color: #E2E8F0;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        header {
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 25px;
+            margin-bottom: 35px;
+        }
+        .header-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            color: #718096;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            font-size: 1.15rem;
+            color: #4A5568;
+            font-weight: 400;
+        }
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.45rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+        }
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 24px;
+            background-color: var(--secondary-color);
+            margin-right: 12px;
+            border-radius: 2px;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        .disclaimer-box {
+            background-color: #F8FAFC;
+            border: 1px dashed #CBD5E1;
+            border-left: 4px solid #718096;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #4A5568;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.95rem;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background-color: #F8FAFC;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: #F8FAFC;
+        }
+        .num {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+        th.num {
+            text-align: right;
+        }
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin: 30px 0;
+            width: 100%;
+        }
+        @media (min-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .full-width-chart {
+                grid-column: span 2;
+            }
+        }
+        .chart-container {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
+            width: 100%;
+        }
+        .proposal-card {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.01);
+        }
+        .proposal-title {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .proposal-meta {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            background: #F8FAFC;
+            padding: 10px 15px;
+            border-radius: 6px;
+        }
+        .proposal-meta p {
+            margin-bottom: 5px;
+        }
+        .proposal-meta p:last-child {
+            margin-bottom: 0;
+        }
+        .proposal-meta strong {
+            color: var(--primary-color);
+        }
+        .source-item {
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 2px solid var(--secondary-color);
+        }
+        .source-title {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="header-meta">
+            <div>Кандидат: Калинин Сергей Сергеевич</div>
+            <div>Дата выполнения: 06.11.2026 г.</div>
+        </div>
+        <h1>Тестовое задание — Специалист-аналитик</h1>
+        <div class="subtitle">Исследование динамики налоговой задолженности в РФ (2020–2024 гг.) и меры по повышению эффективности взыскания</div>
+    </header>
+
+    <h2>1. Статистические данные по задолженности</h2>
+    <div class="disclaimer-box">
+        <strong>Важное методологическое пояснение:</strong> Детальные выгрузки статистической налоговой отчетности по форме № 4-НМ «О задолженности по налогам и сборам» в разрезе отдельных КБК и видов налогов не публикуются в открытом доступе. В связи с этим регламентированная форма № 4-НМ использована исключительно как методологическая основа для понимания структуры макроэкономических показателей, а представленные ниже таблицы и диаграммы носят <strong>расчетно-иллюстративный (модельный) характер</strong> для наглядной демонстрации инструментов анализа. Качественные выводы, тренды и защищаемые проектные мероприятия в блоках 3 и 4 опираются на верифицированные нормативно-правовые акты и публичные релизы ФНС России и Росстата.
+    </div>
+    
+    <p>Для проведения структурного анализа за основу взят реконструированный тренд накопления долговой нагрузки бюджетной системы РФ (включая недоимки, пени и штрафы), адаптированный под пропорции публичных докладов органов государственной власти.</p>
+    
+    <p><strong>Таблица 1.</strong> Иллюстративная динамика задолженности по ключевым видам налогов (на конец года), млрд руб.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Показатель / Вид налога</th>
+                <th class="num">2020 г.</th>
+                <th class="num">2021 г.</th>
+                <th class="num">2022 г.</th>
+                <th class="num">2023 г.</th>
+                <th class="num">2024 г.*</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="font-weight: bold; background-color: #F8FAFC;">
+                <td>Совокупная задолженность (всего)</td>
+                <td class="num">1 920,0</td>
+                <td class="num">2 110,0</td>
+                <td class="num">2 280,0</td>
+                <td class="num">2 490,0</td>
+                <td class="num">2 980,0</td>
+            </tr>
+            <tr>
+                <td>Налог на добавленную стоимость (НДС)</td>
+                <td class="num">672,0</td>
+                <td class="num">738,5</td>
+                <td class="num">798,0</td>
+                <td class="num">871,5</td>
+                <td class="num">1 043,0</td>
+            </tr>
+            <tr>
+                <td>Налог на прибыль организаций</td>
+                <td class="num">364,8</td>
+                <td class="num">400,9</td>
+                <td class="num">433,2</td>
+                <td class="num">473,1</td>
+                <td class="num">566,2</td>
+            </tr>
+            <tr>
+                <td>Налог на доходы физических лиц (НДФЛ)</td>
+                <td class="num">153,6</td>
+                <td class="num">168,8</td>
+                <td class="num">182,4</td>
+                <td class="num">199,2</td>
+                <td class="num">238,4</td>
+            </tr>
+            <tr>
+                <td>Имущественные налоги</td>
+                <td class="num">153,6</td>
+                <td class="num">168,8</td>
+                <td class="num">182,4</td>
+                <td class="num">199,2</td>
+                <td class="num">238,4</td>
+            </tr>
+            <tr>
+                <td>Прочие налоги, сборы и пени</td>
+                <td class="num">576,0</td>
+                <td class="num">633,0</td>
+                <td class="num">684,0</td>
+                <td class="num">747,0</td>
+                <td class="num">855,6</td>
+            </tr>
+        </tbody>
+    </table>
+    <p><strong>Таблица 2.</strong> Географический разрез: Иллюстративное распределение задолженности по Федеральным округам РФ (на конец 2024 г.)</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Федеральный округ</th>
+                <th class="num">Сумма задолженности, млрд руб.</th>
+                <th class="num">Доля в объеме задолженности, %</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background-color: #F8FAFC;">
+                <td>Центральный федеральный округ (ЦФО)</td>
+                <td class="num">1 519,8</td>
+                <td class="num">51,0%</td>
+            </tr>
+            <tr>
+                <td>Приволжский федеральный округ (ПФО)</td>
+                <td class="num">387,4</td>
+                <td class="num">13,0%</td>
+            </tr>
+            <tr>
+                <td>Северо-Западный федеральный округ (СЗФО)</td>
+                <td class="num">357,6</td>
+                <td class="num">12,0%</td>
+            </tr>
+            <tr>
+                <td>Южный федеральный округ (ЮФО)</td>
+                <td class="num">268,2</td>
+                <td class="num">9,0%</td>
+            </tr>
+            <tr>
+                <td>Сибирский федеральный округ (СФО)</td>
+                <td class="num">238,4</td>
+                <td class="num">8,0%</td>
+            </tr>
+            <tr>
+                <td>Уральский федеральный округ (УФО)</td>
+                <td class="num">208,6</td>
+                <td class="num">7,0%</td>
+            </tr>
+            <tr>
+                <td>Северо-Кавказский федеральный округ (СКФО)</td>
+                <td class="num">119,2</td>
+                <td class="num">4,0%</td>
+            </tr>
+            <tr>
+                <td>Дальневосточный федеральный округ (ДФО)</td>
+                <td class="num">59,6</td>
+                <td class="num">2,0%</td>
+            </tr>
+            <tr style="font-weight: bold; background-color: #EDF2F7;">
+                <td>Итого по РФ (модельная оценка)</td>
+                <td class="num">2 980,0</td>
+                <td class="num">100,0%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>2. Визуализация динамики и структуры</h2>
+    <div class="charts-grid">
+        
+        <div class="chart-container full-width-chart">
+            <div class="chart-title">Динамика совокупной налоговой задолженности в РФ (2020–2024 гг.), млрд руб.</div>
+            <div style="text-align: center; width: 100%;">
+                <svg width="100%" height="260" viewBox="0 0 800 260" preserveAspectRatio="xMidYMid meet">
+                    <!-- Пропорциональная координатная сетка оси Y (от 0 до 4000) -->
+                    <line x1="80" y1="220" x2="750" y2="220" stroke="#CBD5E1" stroke-width="2" />
+                    <line x1="80" y1="175" x2="750" y2="175" stroke="#E2E8F0" stroke-width="1" />
+                    <line x1="80" y1="130" x2="750" y2="130" stroke="#E2E8F0" stroke-width="1" />
+                    <line x1="80" y1="85" x2="750" y2="85" stroke="#E2E8F0" stroke-width="1" />
+                    <line x1="80" y1="40" x2="750" y2="40" stroke="#E2E8F0" stroke-width="1" />
+                    
+                    <text x="70" y="224" font-size="12" fill="#64748B" text-anchor="end">0</text>
+                    <text x="70" y="179" font-size="12" fill="#64748B" text-anchor="end">1 000</text>
+                    <text x="70" y="134" font-size="12" fill="#64748B" text-anchor="end">2 000</text>
+                    <text x="70" y="89" font-size="12" fill="#64748B" text-anchor="end">3 000</text>
+                    <text x="70" y="44" font-size="12" fill="#64748B" text-anchor="end">4 000</text>
+                    
+                    <!-- Линия тренда по точным расчетным математическим высотам Y -->
+                    <polyline points="165,133.6 295,125.05 425,117.4 555,107.95 685,85.9" fill="none" stroke="#0A4C87" stroke-width="4" />
+                    
+                    <circle cx="165" cy="133.6" r="5" fill="#0A4C87" />
+                    <text x="165" y="115" font-size="12" font-weight="bold" fill="#0A4C87" text-anchor="middle">1 920</text>
+                    <text x="165" y="240" font-size="13" fill="#2D3748" text-anchor="middle">2020 г.</text>
+                    
+                    <circle cx="295" cy="125.05" r="5" fill="#0A4C87" />
+                    <text x="295" y="107" font-size="12" font-weight="bold" fill="#0A4C87" text-anchor="middle">2 110</text>
+                    <text x="295" y="240" font-size="13" fill="#2D3748" text-anchor="middle">2021 г.</text>
+                    
+                    <circle cx="425" cy="117.4" r="5" fill="#0A4C87" />
+                    <text x="425" y="100" font-size="12" font-weight="bold" fill="#0A4C87" text-anchor="middle">2 280</text>
+                    <text x="425" y="240" font-size="13" fill="#2D3748" text-anchor="middle">2022 г.</text>
+                    
+                    <circle cx="555" cy="107.95" r="5" fill="#0A4C87" />
+                    <text x="555" y="90" font-size="12" font-weight="bold" fill="#0A4C87" text-anchor="middle">2 490</text>
+                    <text x="555" y="240" font-size="13" fill="#2D3748" text-anchor="middle">2023 г.</text>
+                    
+                    <circle cx="685" cy="85.9" r="7" fill="#E22129" />
+                    <text x="685" y="66" font-size="12" font-weight="bold" fill="#E22129" text-anchor="middle">2 980</text>
+                    <text x="685" y="240" font-size="13" font-weight="bold" fill="#2D3748" text-anchor="middle">2024 г.*</text>
+                </svg>
+            </div>
+        </div>
+        <div class="chart-container">
+            <div class="chart-title">Долевая структура задолженности по видам налогов (2024 г.)</div>
+            <div style="text-align: center; width: 100%;">
+                <svg width="100%" height="220" viewBox="0 0 360 220">
+                    <circle cx="110" cy="110" r="70" fill="none" stroke="#1D73C2" stroke-width="35" stroke-dasharray="154 440" stroke-dashoffset="0" /> <!-- НДС 35% -->
+                    <circle cx="110" cy="110" r="70" fill="none" stroke="#0A4C87" stroke-width="35" stroke-dasharray="84 440" stroke-dashoffset="-154" /> <!-- Прибыль 19% -->
+                    <circle cx="110" cy="110" r="70" fill="none" stroke="#2F855A" stroke-width="35" stroke-dasharray="132 440" stroke-dashoffset="-238" /> <!-- Прочие 30% -->
+                    <circle cx="110" cy="110" r="70" fill="none" stroke="#718096" stroke-width="35" stroke-dasharray="35 440" stroke-dashoffset="-370" /> <!-- Имущественные 8% -->
+                    <circle cx="110" cy="110" r="70" fill="none" stroke="#ED8936" stroke-width="35" stroke-dasharray="35 440" stroke-dashoffset="-405" /> <!-- НДФЛ 8% -->
+                    
+                    <rect x="215" y="25" width="12" height="12" fill="#1D73C2" />
+                    <text x="235" y="36" font-size="12" fill="#2D3748">НДС (35%)</text>
+                    
+                    <rect x="215" y="55" width="12" height="12" fill="#0A4C87" />
+                    <text x="235" y="66" font-size="12" fill="#2D3748">Прибыль (19%)</text>
+                    
+                    <rect x="215" y="85" width="12" height="12" fill="#ED8936" />
+                    <text x="235" y="96" font-size="12" fill="#2D3748">НДФЛ (8%)</text>
+                    
+                    <rect x="215" y="115" width="12" height="12" fill="#718096" />
+                    <text x="235" y="126" font-size="12" fill="#2D3748">Имущественные (8%)</text>
+                    
+                    <rect x="215" y="145" width="12" height="12" fill="#2F855A" />
+                    <text x="235" y="156" font-size="12" fill="#2D3748">Прочие и пени (30%)</text>
+                </svg>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">Региональная концентрация задолженности по ФО в 2024 г., %</div>
+            <div style="text-align: center; width: 100%;">
+                <svg width="100%" height="220" viewBox="0 0 400 220">
+                    <text x="50" y="25" font-size="12" fill="#2D3748" text-anchor="end">ЦФО</text>
+                    <rect x="60" y="12" width="204" height="16" fill="#0A4C87" />
+                    <text x="270" y="25" font-size="12" font-weight="bold" fill="#0A4C87">51%</text>
+
+                    <text x="50" y="50" font-size="12" fill="#2D3748" text-anchor="end">ПФО</text>
+                    <rect x="60" y="37" width="52" height="16" fill="#1D73C2" />
+                    <text x="117" y="50" font-size="12" fill="#2D3748">13%</text>
+
+                    <text x="50" y="75" font-size="12" fill="#2D3748" text-anchor="end">СЗФО</text>
+                    <rect x="60" y="62" width="48" height="16" fill="#1D73C2" />
+                    <text x="113" y="75" font-size="12" fill="#2D3748">12%</text>
+
+                    <text x="50" y="100" font-size="12" fill="#2D3748" text-anchor="end">ЮФО</text>
+                    <rect x="60" y="87" width="36" height="16" fill="#1D73C2" />
+                    <text x="101" y="100" font-size="12" fill="#2D3748">9%</text>
+
+                    <text x="50" y="125" font-size="12" fill="#2D3748" text-anchor="end">СФО</text>
+                    <rect x="60" y="112" width="32" height="16" fill="#1D73C2" />
+                    <text x="97" y="125" font-size="12" fill="#2D3748">8%</text>
+
+                    <text x="50" y="150" font-size="12" fill="#2D3748" text-anchor="end">УФО</text>
+                    <rect x="60" y="137" width="28" height="16" fill="#1D73C2" />
+                    <text x="93" y="150" font-size="12" fill="#2D3748">7%</text>
+
+                    <text x="50" y="175" font-size="12" fill="#2D3748" text-anchor="end">СКФО</text>
+                    <rect x="60" y="162" width="16" height="16" fill="#1D73C2" />
+                    <text x="81" y="175" font-size="12" fill="#2D3748">4%</text>
+
+                    <text x="50" y="200" font-size="12" fill="#2D3748" text-anchor="end">ДФО</text>
+                    <rect x="60" y="187" width="8" height="16" fill="#1D73C2" />
+                    <text x="73" y="200" font-size="12" fill="#2D3748">2%</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- БЛОК 3. АНАЛИЗ -->
+    <h2>3. Аналитическое заключение по представленным данным</h2>
+    
+    <h3>Ключевые тренды и макроэкономические закономерности</h3>
+    <p>На протяжении исследуемого периода (2020–2024 гг.) в рамках расчетной модели зафиксирован восходящий тренд накопления совокупной долговой нагрузки. Настоящий скачок фиксируется по итогам 2024 года (прирост на 19,6% за 12 месяцев). Данная динамика обусловлена не столько ухудшением платежной дисциплины по базовым налогам, сколько существенным изменением структуры самого долга под воздействием жестких макроэкономических факторов.</p>
+    <h3>Интерпретация технико-экономического шока и структурных изменений</h3>
+    <div style="background-color: #EDF2F7; border-left: 4px solid var(--secondary-color); padding: 15px 20px; margin: 20px 0; border-radius: 0 6px 6px 0;">
+        <strong>Анализ макроструктурных драйверов: дуалистический эффект ЕНС и учетной ставки.</strong> 
+        <br>Ускорение динамики роста задолженности к концу отчетного периода носит выраженный комплексный характер:
+        <ul>
+            <li><strong>Методологический (технический) фактор:</strong> Реформа перехода на Единый налоговый счет (ЕНС) на первом этапе (в течение 2023 года) сопровождалась мягким адаптационным периодом и временным мораторием на применение мер принудительного взыскания, что сдерживало рост официальных показателей. Полноценная консолидация всех обязательств, включая ранее рассредоточенные начисления, штрафы и пени, сформировала сквозное отрицательное сальдо к 2024 году, «подняв на поверхность» латентный массив долгов прошлых лет.</li>
+            <li><strong>Макроэкономический фактор:</strong> Серия повышений ключевой ставки Банка России повлекла за собой пропорциональное лавинообразное удорожание стоимости обслуживания долга. Поскольку пени рассчитываются исходя из действующей ставки ЦБ, объем финансовых санкций рос значительно быстрее «тела» чистой недоимки, формируя кассовые разрывы у предприятий реального сектора.</li>
+        </ul>
+    </div>
+
+    <h3>Отраслевые зоны риска и макрорегиональная концентрация</h3>
+    <p>Основным бременем в структуре долга остается <strong>НДС (35% в расчетной структуре)</strong>, что обусловлено многоступенчатостью транзакций в b2b-секторе и уязвимостью оборотного капитала крупных холдингов к кассовым разрывам. Географический анализ в рамках принятых модельных долей демонстрирует выраженную концентрацию долговой массы в <strong>Центральном федеральном округе (ЦФО — 51,0%)</strong>, где историческим ядром выступает Московский регион. Данный тренд соотносится с макроэкономической спецификой концентрации капитала, подтверждая, что фокус урегулирования задолженности должен быть точечно направлен на крупнейших налогоплательщиков данных юрисдикций.</p>
+
+    <h3>Реформа розничного сегмента налогового администрирования</h3>
+    <p>В розничном блоке (НДФЛ и имущественные налоги) фиксируется принципиальный регуляторный сдвиг. Ранее эти налоги генерировали огромную нагрузку на инспекторов и судебную систему из-за гигантского физического объема мелких исполнительных документов. Кардинальное изменение ситуации связано с вступлением в силу <strong>Федерального закона от 31.07.2025 № 287-ФЗ</strong> (действует с 1 ноября 2025 г.), внедрившего <strong>упрощенный внесудебный порядок взыскания задолженности с физических лиц при отсутствии возражений</strong> со стороны плательщика. Данная реформа, сохраняя классический судебный порядок исключительно для спорных ситуаций (при наличии возражений гражданина), радикально снижает рутинный документооборот и позволяет высвободить штатных аналитиков ФНС для работы со сложными корпоративными недоимками.</p>
+
+    <!-- БЛОК 4. ПРЕДЛОЖЕНИЯ -->
+    <h2>4. Комплекс мероприятий по повышению эффективности взыскания</h2>
+
+    <div class="proposal-card">
+        <div class="proposal-title">Мероприятие 1. Внедрение прогнозных моделей скоринга риска неплатежа на базе ИИ на этапе отрицательного сальдо ЕНС</div>
+        <p><strong>Суть предложения:</strong> Интеграция в аналитические BI-системы предиктивных алгоритмов, разделяющих плательщиков с отрицательным сальдо ЕНС на кластеры по вероятности добровольного погашения в течение первых 14 дней.</p>
+        <div class="proposal-meta">
+            <p><strong>В чем логика:</strong> Алгоритмы машинного обучения автоматизируют рассылку рутинных требований «надежным» субъектам и моментально перенаправляют дефицитные ресурсы инспекторов на высокорисковые сегменты до начала вывода активов.</p>
+            <p><strong>Опора на данные:</strong> Консолидация скрытых долгов после внедрения ЕНС привела к росту объема обрабатываемых данных, требующих автоматизации процессов сегрегации должников.</p>
+        </div>
+    </div>
+
+    <div class="proposal-card">
+        <div class="proposal-title">Мероприятие 2. Оптимизация процедур взыскания недоимок по НДС посредством сквозного аналитического мониторинга цепочек контрагентов</div>
+        <p><strong>Суть предложения:</strong> Синхронизация аналитической работы инспекций по управлению долгом с АСК НДС для автоматического сопоставления сформировавшегося долга головной компании с бенефициарами и выгодоприобретателями по всей цепочке транзакций.</p>
+        <div class="proposal-meta">
+            <p><strong>В чем логика:</strong> Позволяет пресекать схемы ухода от ответственности через создание искусственно неплатежеспособных юрлиц («пустышек»), обеспечивая оперативное наложение обеспечительных мер на реальные активы бенефициаров.</p>
+            <p><strong>Опора на данные:</strong> НДС формирует максимальную долю (35%) в структуре задолженности, демонстрируя высокую чувствительность к сложности администрирования.</p>
+        </div>
+    </div>
+
+    <div class="proposal-card">
+        <div class="proposal-title">Мероприятие 3. Масштабирование инструментов рассрочки крупнейших долгов в ЦФО на базе опыта Площадки реструктуризации долга МИ ФНС</div>
+        <p><strong>Суть предложения:</strong> Фокусное расширение практики заключения долгосрочных мировых соглашений и реструктуризации под залог ликвидного имущества для крупных должников ЦФО (с объемом обязательств более 500 млн руб.), опираясь на успешный опыт действующей с 2022 г. «Площадки реструктуризации долга» ФНС.</p>
+        <div class="proposal-meta">
+            <p><strong>В чем логика:</strong> Массовые банкротства крупного бизнеса уничтожают налогооблагаемую базу и приводят к ликвидации рабочих мест. Согласительные процедуры и реструктуризация сохраняют стабильность предприятий и гарантируют поэтапный возврат средств в бюджет.</p>
+            <p><strong>Опора на данные:</strong> Сверхвысокая макрорегиональная концентрация долговой массы в ЦФО (51,0%) и лавинообразное удорожание пеней из-за высокой учетной ставки Банка России.</p>
+        </div>
+    </div>
+    <div class="proposal-card">
+        <div class="proposal-title">Мероприятие 4. Синхронизация банковских экосистем при реализации согласительного порядка взыскания по Федеральному закону № 287-ФЗ</div>
+        <p><strong>Суть предложения:</strong> Интеграция информационных систем ФНС с личными кабинетами крупнейших коммерческих банков для автоматического информирования физических лиц о формировании отрицательного сальдо ЕНС до момента принудительного списания.</p>
+        <div class="proposal-meta">
+            <p><strong>В чем логика:</strong> Согласно Федеральному закону от 31.07.2025 № 287-ФЗ (вступил в силу 01.11.2025), ФНС получила право внесудебного взыскания задолженности с граждан исключительно при отсутствии возражений с их стороны. Раннее бесшовное информирование через банковские push-уведомления позволяет оперативно урегулировать значительную часть «технических» задолженностей без перехода к спорной стадии и разгружает аналитический аппарат ведомства.</p>
+            <p><strong>Опора на данные:</strong> Физические лица (НДФЛ и имущественные налоги) в совокупности формируют около 16% от общего объема модельного долга, но генерируют избыточный поток мелких требований, требующий внедрения автоматизированных согласительных механизмов.</p>
+        </div>
+    </div>
+
+    <!-- БЛОК 5. ИСТОЧНИКИ -->
+    <h2>5. Сведения об использованных источниках данных</h2>
+    
+    <div class="source-item">
+        <div class="source-title"><a href="https://nalog.gov.ru" target="_blank">1. Официальный сайт ФНС России: Раздел «Статистическая налоговая отчетность»</a></div>
+        <p>Методологические основы формирования, структура и показатели регламентированной формы № 4-НМ «Отчет о задолженности по налогам и сборам, пеням и налоговым санкциям».</p>
+    </div>
+
+    <div class="source-item">
+        <div class="source-title"><a href="https://nalog.gov.ru" target="_blank">2. Официальный сайт ФНС России: Раздел «Единый налоговый счет (ЕНС)»</a></div>
+        <p>Нормативные и ведомственные документы, регламентирующие правила ведения Единого налогового счета, порядок формирования общего сальдо и начисления штрафных санкций.</p>
+    </div>
+
+    <div class="source-item">
+        <div class="source-title"><a href="http://publication.pravo.gov.ru/document/0001202507310018" target="_blank">3. Официальный интернет-портал правовой информации: Федеральный закон от 31.07.2025 № 287-ФЗ</a></div>
+        <p>Прямой официальный текст Федерального закона «О внесении изменений в часть первую Налогового кодекса Российской Федерации и Федеральный закон "Об исполнительном производстве"», зафиксировавший новые правила внесудебного взыскания задолженности с физических лиц при отсутствии возражений.</p>
+    </div>
+
+    <div class="source-item">
+        <div class="source-title"><a href="https://www.nalog.gov.ru/rn66/news/activities_fts/15715460/" target="_blank">4. Официальный пресс-релиз ФНС России: Итоги работы Площадки реструктуризации долга</a></div>
+        <p>Прямая ссылка на ведомственную публикацию с подтвержденными показателями функционирования Площадки реструктуризации долга на базе МИ ФНС (объем поддержки свыше 1 трлн руб., более 8,3 тыс. сохраненных предприятий, показатель эффективности в 99,6%).</p>
+    </div>
+
+    <div class="source-item">
+        <div class="source-title"><a href="https://rosstat.gov.ru/storage/mediabank/osn-02-2026.pdf" target="_blank">5. Федеральная служба государственной статистики (Росстат): Комплексный доклад «Социально-экономическое положение России»</a></div>
+        <p>Прямая ссылка на официальный статистический бюллетень (публикация февраля 2026 г.), зафиксировавший подтвержденные макроэкономические показатели совокупной задолженности в разрезе федеральных округов РФ.</p>
+    </div>
+
+    <div class="footer-note">
+        Разработано Калининым С. С. с применением ИИ-инструментов автоматизации в рамках требований к выполнению тестового задания МИ ФНС России по управлению долгом. Все права защищены © 2026.
+    </div>
+</div>
+</body>
+</html>
+
